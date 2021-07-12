@@ -27,12 +27,37 @@ class _StarwarsListState extends State<StarwarsList> {
 
   @override
   Widget build(BuildContext context) {
-    return Text("hello world");
+    return ListView.builder(
+        itemCount: people.length,
+        itemBuilder: (context, index) {
+          final People person = people[index];
+          return Card(
+            child: Column(
+              children: <Widget>[
+                // Image.network(
+                //   person.thumbnailUrl,
+                //   fit: BoxFit.fitWidth,
+                //   width: double.infinity,
+                //   height: 160,
+                // ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Text(person.name,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                ),
+              ],
+            ),
+          );
+        });
   }
 
   Future<void> fetchPeopleFromRepo() async {
+    print("we're in fetchPeopleFromRepo");
     var fetchedPeople = await repo.fetchPeople(this.page);
     this.page = this.page + 1;
     people.addAll(fetchedPeople);
+    print(people.length);
+    setState(() {});
   }
 }

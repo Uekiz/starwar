@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 class StarwarsRepo {
   Future<List<People>> fetchPeople(int page) async {
+    print("we're in fetchPeople");
     var response = await Dio().get('https://swapi.dev/api/people/?page=$page');
     List<People> listPeople = People.toList(response.data['results']);
     return listPeople;
@@ -17,10 +18,12 @@ class People {
   People(this.name, this.height, this.mass, this.gender);
 
   factory People.fromJson(Map<String, dynamic> json) {
+    print("factory works");
     return People(json["name"], json["height"], json["mass"], json["gender"]);
   }
 
   static List<People> toList(List<dynamic> list) {
+    print("toList works");
     return list.map((e) => People.fromJson(e)).toList();
   }
 }
