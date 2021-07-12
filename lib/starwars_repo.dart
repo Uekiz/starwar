@@ -10,16 +10,21 @@ class StarwarsRepo {
 }
 
 class People {
+  final String id;
   final String name;
   final String height;
   final String mass;
   final String gender;
+  
 
-  People(this.name, this.height, this.mass, this.gender);
+  People(this.id, this.name, this.height, this.mass, this.gender);
 
   factory People.fromJson(Map<String, dynamic> json) {
     print("factory works");
-    return People(json["name"], json["height"], json["mass"], json["gender"]);
+    var id = json["url"].toString().substring(28).split('/')[1];
+    print(id);
+
+    return People(id, json["name"], json["height"], json["mass"], json["gender"]);
   }
 
   static List<People> toList(List<dynamic> list) {
