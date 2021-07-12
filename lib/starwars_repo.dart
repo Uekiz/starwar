@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class StarwarsRepo {
-  Future<List<People>> fetchPeople(int page ) async {
+  Future<List<People>> fetchPeople(int page) async {
     var response = await Dio().get('https://swapi.dev/api/people/?page=$page');
     List<People> listPeople = People.toList(response.data['results']);
     return listPeople;

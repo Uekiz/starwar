@@ -11,7 +11,6 @@ class StarwarsList extends StatefulWidget {
 }
 
 class _StarwarsListState extends State<StarwarsList> {
-
   final StarwarsRepo repo;
   late int page;
   late List<People> people;
@@ -23,15 +22,17 @@ class _StarwarsListState extends State<StarwarsList> {
     super.initState();
     page = 1;
     people = [];
-    fetchPeople();
+    fetchPeopleFromRepo();
   }
 
   @override
   Widget build(BuildContext context) {
     return Text("hello world");
   }
-}
 
-Future<void> fetchPeople() async {
-  
+  Future<void> fetchPeopleFromRepo() async {
+    var fetchedPeople = await repo.fetchPeople(this.page);
+    this.page = this.page + 1;
+    people.addAll(fetchedPeople);
+  }
 }
