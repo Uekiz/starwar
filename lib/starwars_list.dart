@@ -62,9 +62,11 @@ class _StarwarsListState extends State<StarwarsList> {
           itemCount: people.length + (_hasMore ? 1 : 0),
           itemBuilder: (context, index) {
             if (index == people.length - _nextPageThreshold) {
+              print("threshold");
               fetchPeopleFromRepo();
             }
             if (index == people.length) {
+              print("length");
               if (_error) {
                 return Center(
                     child: InkWell(
@@ -80,6 +82,8 @@ class _StarwarsListState extends State<StarwarsList> {
                     child: Text("Error while loading photos, tap to try agin"),
                   ),
                 ));
+              } else if (people.length == 82) {
+                return Container();
               } else {
                 return Center(
                     child: Padding(
@@ -102,7 +106,7 @@ class _StarwarsListState extends State<StarwarsList> {
                     padding: const EdgeInsets.all(50),
                     child: Text(person.name,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16)),
+                            fontWeight: FontWeight.bold, fontSize: 24)),
                   ),
                 ],
               ),
@@ -111,14 +115,15 @@ class _StarwarsListState extends State<StarwarsList> {
     }
     return Container();
   }
-  
 
   Future<void> fetchPeopleFromRepo() async {
     print("we're in fetchPeopleFromRepo");
-    var fetchedPeople = await repo.fetchPeople(this.page);
-    this.page = this.page + 1;
-    people.addAll(fetchedPeople);
-    print(people.length);
-    setState(() {});
+    if (this.page <= 9) {
+      var fetchedPeople = await repo.fetchPeople(this.page);
+      this.page = this.page + 1;
+      people.addAll(fetchedPeople);
+      print(people.length);
+      setState(() {});
+    }
   }
 }
