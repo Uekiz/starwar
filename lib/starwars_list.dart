@@ -96,18 +96,32 @@ class _StarwarsListState extends State<StarwarsList> {
             return Card(
               child: Column(
                 children: <Widget>[
-                  // Image.network(
-                  //   person.thumbnailUrl,
-                  //   fit: BoxFit.fitWidth,
-                  //   width: double.infinity,
-                  //   height: 160,
-                  // ),
-                  Padding(
-                    padding: const EdgeInsets.all(50),
-                    child: Text(person.name,
+                  ListTile(
+                    leading: CircleAvatar(
+                      child: Image.network(
+                        'https://starwars-visualguide.com/assets/img/characters/${person.id}.jpg',
+                        fit: BoxFit.fitWidth,
+                        width: double.infinity,
+                        height: 160,
+                      ),
+                    ),
+                    title: Text("${person.name}",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 24)),
-                  ),
+                    subtitle: Row(
+                      children: [
+                        Text("gender : ${person.gender}   ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal, fontSize: 16)),
+                        Text("height : ${person.height}   ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal, fontSize: 16)),
+                        Text("mass : ${person.mass}   ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal, fontSize: 16)),
+                      ],
+                    ),
+                  )
                 ],
               ),
             );
@@ -122,7 +136,7 @@ class _StarwarsListState extends State<StarwarsList> {
       var fetchedPeople = await repo.fetchPeople(this.page);
       this.page = this.page + 1;
       people.addAll(fetchedPeople);
-      print(people.length);
+      // print(people.length);
       setState(() {});
     }
   }
