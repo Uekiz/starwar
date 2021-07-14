@@ -97,6 +97,7 @@ class _StarwarsListState extends State<StarwarsList> {
               child: Column(
                 children: <Widget>[
                   ListTile(
+                    isThreeLine: true,
                     leading: CircleAvatar(
                       child: Image.network(
                         'https://starwars-visualguide.com/assets/img/characters/${person.id}.jpg',
@@ -108,19 +109,20 @@ class _StarwarsListState extends State<StarwarsList> {
                     title: Text("${person.name}",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 24)),
-                    subtitle: Row(
-                      children: [
-                        Text("gender : ${person.gender}   ",
+                    // subtitle: Row(
+                    //   children: [
+                      subtitle:
+                        Text("gender : ${person.gender} \nheight : ${person.height} \nmass : ${person.mass}   ",
                             style: TextStyle(
                                 fontWeight: FontWeight.normal, fontSize: 16)),
-                        Text("height : ${person.height}   ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.normal, fontSize: 16)),
-                        Text("mass : ${person.mass}   ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.normal, fontSize: 16)),
-                      ],
-                    ),
+                        // Text("height : ${person.height}   ",
+                        //     style: TextStyle(
+                        //         fontWeight: FontWeight.normal, fontSize: 16)),
+                        // Text("mass : ${person.mass}   ",
+                        //     style: TextStyle(
+                        //         fontWeight: FontWeight.normal, fontSize: 16)),
+                    //   ],
+                    // ),
                   )
                 ],
               ),
